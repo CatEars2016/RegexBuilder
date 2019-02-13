@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -369,9 +369,11 @@ namespace Regex_Builder
             if (mCodeNone.Checked)
                 return String.Empty;
             else if (mCodeCS.Checked)
-                return String.Format("Regex expression = new Regex(\"{0}\", {1});", CSEscapeString(RegularExpression.Text), OptionsToString("|"));
+                // 将原正则表达式文本作为代码注释，方便后续修改正则表达式
+                return String.Format("Regex expression = new Regex(\"{0}\", {1});", CSEscapeString(RegularExpression.Text), OptionsToString("|")) + " // " + RegularExpression.Text;
             else if (mCodeVB.Checked)
-                return String.Format("Dim expression As New Regex(\"{0}\", {1})", VBEscapeString(RegularExpression.Text), OptionsToString("Or"));
+                // 将原正则表达式文本作为代码注释，方便后续修改正则表达式
+                return String.Format("Dim expression As New Regex(\"{0}\", {1})", VBEscapeString(RegularExpression.Text), OptionsToString("Or")) + " // " + RegularExpression.Text;
             else
                 return String.Empty;
         }
