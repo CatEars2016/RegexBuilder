@@ -1,4 +1,12 @@
+# RegexBuilder New!
+
+在原开源项目 https://github.com/ScottLouvau/RegexBuilder 的基础上。增加：
+1. 生成的代码前一行增加注释，如果需要调整正则表达式可以从注释复制出来修改。
+2. C#代码增加生成静态字段的形式：“static private Regex expression = new Regex("R(?[eg]+)x", RegexOptions.Compiled);”。
+3. 增加软件图标。
+
 # RegexBuilder
+
 RegexBuilder helps you write, debug, and test regular expressions using the .NET syntax.
  - Use the menus to help construct expressions.
  - Run all or part of the expression on your source text quickly.
