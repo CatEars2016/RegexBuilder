@@ -38,7 +38,10 @@ namespace Regex_Builder
         public RegexBuilder()
         {
             InitializeComponent();
-        }
+			// CatEars: 从程序集上读取版本号
+			Version version = typeof(RegexBuilder).Assembly.GetName().Version;
+			this.Text = String.Format("Regex Builder v{0}.{1:00}", version.Major, version.Minor);
+		}
 
         #region Member Fields
         public string[] args;
@@ -75,9 +78,11 @@ namespace Regex_Builder
             if (OptionIgnorePatternWhitespace.Checked) options = options | RegexOptions.IgnorePatternWhitespace;
             if (OptionMultiline.Checked) options = options | RegexOptions.Multiline;
             if (OptionRightToLeft.Checked) options = options | RegexOptions.RightToLeft;
-            if (OptionSingleline.Checked) options = options | RegexOptions.Singleline;
+			if (OptionSingleline.Checked) options = options | RegexOptions.Singleline;
+			// CatEars: 增加Compiled选项
+			if (OptionCompiled.Checked) options = options | RegexOptions.Compiled;
 
-            return options;
+			return options;
         }
 
         private void SetOptions(RegexOptions options)
@@ -89,8 +94,10 @@ namespace Regex_Builder
             OptionIgnorePatternWhitespace.Checked = (options & RegexOptions.IgnorePatternWhitespace) != RegexOptions.None;
             OptionMultiline.Checked = (options & RegexOptions.Multiline) != RegexOptions.None;
             OptionRightToLeft.Checked = (options & RegexOptions.RightToLeft) != RegexOptions.None;
-            OptionSingleline.Checked = (options & RegexOptions.Singleline) != RegexOptions.None;
-        }
+			OptionSingleline.Checked = (options & RegexOptions.Singleline) != RegexOptions.None;
+			// CatEars: 增加Compiled选项
+			OptionCompiled.Checked = (options & RegexOptions.Compiled) != RegexOptions.None;
+		}
         #endregion
 
         #region Highlight and Scroll Methods
@@ -243,7 +250,8 @@ namespace Regex_Builder
                 string codeExpression = ExpressionString();
 
                 if (codeExpression.Length > 0)
-                    StatusTextBox.Text += "\r\n" + codeExpression;
+					// CatEars: 状态后面空一行
+					StatusTextBox.Text += "\r\n\r\n" + codeExpression;
             }
 
             lastStatusWritten = StatusTextBox.Text;
@@ -369,11 +377,13 @@ namespace Regex_Builder
             if (mCodeNone.Checked)
                 return String.Empty;
             else if (mCodeCS.Checked)
-                // 将原正则表达式文本作为代码注释，方便后续修改正则表达式
-                return String.Format("Regex expression = new Regex(\"{0}\", {1});", CSEscapeString(RegularExpression.Text), OptionsToString("|")) + " // " + RegularExpression.Text;
+                // CatEars: 将原正则表达式文本作为代码注释，方便后续修改正则表达式
+                return "// RegularExpression: " + RegularExpression.Text + "\r\n"
+					+ String.Format("Regex expression = new Regex(\"{0}\", {1});", CSEscapeString(RegularExpression.Text), OptionsToString("|"));
             else if (mCodeVB.Checked)
-                // 将原正则表达式文本作为代码注释，方便后续修改正则表达式
-                return String.Format("Dim expression As New Regex(\"{0}\", {1})", VBEscapeString(RegularExpression.Text), OptionsToString("Or")) + " // " + RegularExpression.Text;
+				// CatEars: 将原正则表达式文本作为代码注释，方便后续修改正则表达式
+				return "' RegularExpression: " + RegularExpression.Text + "\r\n"
+					+ String.Format("Dim expression As New Regex(\"{0}\", {1})", VBEscapeString(RegularExpression.Text), OptionsToString("Or"));
             else
                 return String.Empty;
         }
