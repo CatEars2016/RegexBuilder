@@ -379,6 +379,10 @@ namespace Regex_Builder
             else if (mCodeCS.Checked)
                 // CatEars: 将原正则表达式文本作为代码注释，方便后续修改正则表达式
                 return "// RegularExpression: " + RegularExpression.Text + "\r\n"
+					+ (mCodeEx_static.Checked ? "static " : "")
+					+ (mCodeEx1_public.Checked ? "public " : "")
+					+ (mCodeEx1_protected.Checked ? "protected " : "")
+					+ (mCodeEx1_private.Checked ? "private " : "")
 					+ String.Format("Regex expression = new Regex(\"{0}\", {1});", CSEscapeString(RegularExpression.Text), OptionsToString("|"));
             else if (mCodeVB.Checked)
 				// CatEars: 将原正则表达式文本作为代码注释，方便后续修改正则表达式
@@ -789,7 +793,30 @@ namespace Regex_Builder
             OptionsMenu.Show(OptionsButton, new Point(OptionsButton.Width, 0));
         }
 
-        private void MenuButton_Click(object sender, EventArgs e)
+		// CatEars: 增加static和非static切换
+		private void StaticSwitchButton_Click(object sender, EventArgs e)
+		{
+			if (mCodeEx_static.Checked)
+			{
+				mCodeEx_static.Checked = false;
+				mCodeEx1_public.Checked = false;
+				mCodeEx1_protected.Checked = false;
+				mCodeEx1_private.Checked = false;
+				OptionCompiled.Checked = false;
+			}
+			else
+			{
+				mCodeEx_static.Checked = true;
+				mCodeEx1_public.Checked = false;
+				mCodeEx1_protected.Checked = false;
+				mCodeEx1_private.Checked = true;
+				OptionCompiled.Checked = true;
+			}
+			RunExpression();
+		}
+
+
+		private void MenuButton_Click(object sender, EventArgs e)
         {
             ExpressionMenu.Show(MenuButton, new Point(MenuButton.Width, 0));
         }
@@ -1146,10 +1173,27 @@ namespace Regex_Builder
             mCodeNone.Checked = false;
             ((MenuItem)sender).Checked = true;
             RunExpression();
-        }
+		}
 
-        #endregion
-    }
+		// CatEars: 增加 public protected private 的选项
+		private void mCodeEx1Change(object sender, EventArgs e)
+		{
+			mCodeEx1_public.Checked = false;
+			mCodeEx1_protected.Checked = false;
+			mCodeEx1_private.Checked = false;
+			((MenuItem)sender).Checked = true;
+			RunExpression();
+		}
+
+		// CatEars: 增加 static 的选项
+		private void mCodeExChange(object sender, EventArgs e)
+		{
+			((MenuItem)sender).Checked = !((MenuItem)sender).Checked;
+			RunExpression();
+		}
+
+		#endregion
+	}
 
     #region Region Class
     public enum RegionType

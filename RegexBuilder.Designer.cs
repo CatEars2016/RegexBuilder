@@ -110,6 +110,11 @@ namespace Regex_Builder
 			this.mCodeCS = new System.Windows.Forms.MenuItem();
 			this.mCodeVB = new System.Windows.Forms.MenuItem();
 			this.mCodeNone = new System.Windows.Forms.MenuItem();
+			this.menuItem3 = new System.Windows.Forms.MenuItem();
+			this.mCodeEx1_public = new System.Windows.Forms.MenuItem();
+			this.mCodeEx1_protected = new System.Windows.Forms.MenuItem();
+			this.mCodeEx1_private = new System.Windows.Forms.MenuItem();
+			this.mCodeEx_static = new System.Windows.Forms.MenuItem();
 			this.mLoadSourceText = new System.Windows.Forms.MenuItem();
 			this.mLoadFile = new System.Windows.Forms.MenuItem();
 			this.mSaveFile = new System.Windows.Forms.MenuItem();
@@ -123,6 +128,7 @@ namespace Regex_Builder
 			this.SplitLeft = new System.Windows.Forms.SplitContainer();
 			this.SourceText = new System.Windows.Forms.RichTextBox();
 			this.RegularExpression = new System.Windows.Forms.RichTextBox();
+			this.StaticSwitchButton = new System.Windows.Forms.Button();
 			this.OptionsButton = new System.Windows.Forms.Button();
 			this.ExecuteButton = new System.Windows.Forms.Button();
 			this.MenuButton = new System.Windows.Forms.Button();
@@ -138,6 +144,7 @@ namespace Regex_Builder
 			this.OptionMultiline = new System.Windows.Forms.ToolStripMenuItem();
 			this.OptionRightToLeft = new System.Windows.Forms.ToolStripMenuItem();
 			this.OptionSingleline = new System.Windows.Forms.ToolStripMenuItem();
+			this.OptionCompiled = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
 			this.setTolerantOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pushOptionsIntoExpressionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -147,7 +154,6 @@ namespace Regex_Builder
 			this.hiddenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.executeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.OptionCompiled = new System.Windows.Forms.ToolStripMenuItem();
 			this.SplitMain.Panel1.SuspendLayout();
 			this.SplitMain.Panel2.SuspendLayout();
 			this.SplitMain.SuspendLayout();
@@ -688,7 +694,12 @@ namespace Regex_Builder
 			this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.mCodeCS,
             this.mCodeVB,
-            this.mCodeNone});
+            this.mCodeNone,
+            this.menuItem3,
+            this.mCodeEx1_public,
+            this.mCodeEx1_protected,
+            this.mCodeEx1_private,
+            this.mCodeEx_static});
 			this.menuItem1.Text = "Dispay Code";
 			// 
 			// mCodeCS
@@ -712,6 +723,35 @@ namespace Regex_Builder
 			this.mCodeNone.RadioCheck = true;
 			this.mCodeNone.Text = "None";
 			this.mCodeNone.Click += new System.EventHandler(this.mCodeChange);
+			// 
+			// menuItem3
+			// 
+			this.menuItem3.Index = 3;
+			this.menuItem3.Text = "-";
+			// 
+			// mCodeEx1_public
+			// 
+			this.mCodeEx1_public.Index = 4;
+			this.mCodeEx1_public.Text = "public";
+			this.mCodeEx1_public.Click += new System.EventHandler(this.mCodeEx1Change);
+			// 
+			// mCodeEx1_protected
+			// 
+			this.mCodeEx1_protected.Index = 5;
+			this.mCodeEx1_protected.Text = "protected";
+			this.mCodeEx1_protected.Click += new System.EventHandler(this.mCodeEx1Change);
+			// 
+			// mCodeEx1_private
+			// 
+			this.mCodeEx1_private.Index = 6;
+			this.mCodeEx1_private.Text = "private";
+			this.mCodeEx1_private.Click += new System.EventHandler(this.mCodeEx1Change);
+			// 
+			// mCodeEx_static
+			// 
+			this.mCodeEx_static.Index = 7;
+			this.mCodeEx_static.Text = "static";
+			this.mCodeEx_static.Click += new System.EventHandler(this.mCodeExChange);
 			// 
 			// mLoadSourceText
 			// 
@@ -782,7 +822,7 @@ namespace Regex_Builder
 			// 
 			this.SplitMain.Panel2.Controls.Add(this.SplitRight);
 			this.SplitMain.Size = new System.Drawing.Size(1019, 748);
-			this.SplitMain.SplitterDistance = 615;
+			this.SplitMain.SplitterDistance = 609;
 			this.SplitMain.SplitterWidth = 5;
 			this.SplitMain.TabIndex = 0;
 			// 
@@ -802,11 +842,12 @@ namespace Regex_Builder
 			// SplitLeft.Panel2
 			// 
 			this.SplitLeft.Panel2.Controls.Add(this.RegularExpression);
+			this.SplitLeft.Panel2.Controls.Add(this.StaticSwitchButton);
 			this.SplitLeft.Panel2.Controls.Add(this.OptionsButton);
 			this.SplitLeft.Panel2.Controls.Add(this.ExecuteButton);
 			this.SplitLeft.Panel2.Controls.Add(this.MenuButton);
-			this.SplitLeft.Size = new System.Drawing.Size(615, 748);
-			this.SplitLeft.SplitterDistance = 529;
+			this.SplitLeft.Size = new System.Drawing.Size(609, 748);
+			this.SplitLeft.SplitterDistance = 523;
 			this.SplitLeft.SplitterWidth = 5;
 			this.SplitLeft.TabIndex = 0;
 			this.SplitLeft.TabStop = false;
@@ -817,7 +858,7 @@ namespace Regex_Builder
 			this.SourceText.Location = new System.Drawing.Point(0, 0);
 			this.SourceText.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.SourceText.Name = "SourceText";
-			this.SourceText.Size = new System.Drawing.Size(615, 529);
+			this.SourceText.Size = new System.Drawing.Size(609, 523);
 			this.SourceText.TabIndex = 0;
 			this.SourceText.Text = resources.GetString("SourceText.Text");
 			this.SourceText.TextChanged += new System.EventHandler(this.SourceText_TextChanged);
@@ -831,15 +872,27 @@ namespace Regex_Builder
 			this.RegularExpression.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.RegularExpression.Name = "RegularExpression";
 			this.RegularExpression.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedHorizontal;
-			this.RegularExpression.Size = new System.Drawing.Size(547, 206);
+			this.RegularExpression.Size = new System.Drawing.Size(541, 212);
 			this.RegularExpression.TabIndex = 4;
 			this.RegularExpression.Text = "R(?<middle>[eg]+)x";
 			this.RegularExpression.TextChanged += new System.EventHandler(this.RegularExpression_TextChanged);
 			// 
+			// StaticSwitchButton
+			// 
+			this.StaticSwitchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.StaticSwitchButton.Location = new System.Drawing.Point(555, 109);
+			this.StaticSwitchButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.StaticSwitchButton.Name = "StaticSwitchButton";
+			this.StaticSwitchButton.Size = new System.Drawing.Size(48, 27);
+			this.StaticSwitchButton.TabIndex = 3;
+			this.StaticSwitchButton.Text = "S";
+			this.StaticSwitchButton.UseVisualStyleBackColor = true;
+			this.StaticSwitchButton.Click += new System.EventHandler(this.StaticSwitchButton_Click);
+			// 
 			// OptionsButton
 			// 
 			this.OptionsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.OptionsButton.Location = new System.Drawing.Point(561, 74);
+			this.OptionsButton.Location = new System.Drawing.Point(555, 74);
 			this.OptionsButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.OptionsButton.Name = "OptionsButton";
 			this.OptionsButton.Size = new System.Drawing.Size(48, 27);
@@ -851,7 +904,7 @@ namespace Regex_Builder
 			// ExecuteButton
 			// 
 			this.ExecuteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.ExecuteButton.Location = new System.Drawing.Point(561, 39);
+			this.ExecuteButton.Location = new System.Drawing.Point(555, 39);
 			this.ExecuteButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.ExecuteButton.Name = "ExecuteButton";
 			this.ExecuteButton.Size = new System.Drawing.Size(49, 27);
@@ -863,7 +916,7 @@ namespace Regex_Builder
 			// MenuButton
 			// 
 			this.MenuButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.MenuButton.Location = new System.Drawing.Point(561, 5);
+			this.MenuButton.Location = new System.Drawing.Point(555, 5);
 			this.MenuButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.MenuButton.Name = "MenuButton";
 			this.MenuButton.Size = new System.Drawing.Size(51, 27);
@@ -888,8 +941,8 @@ namespace Regex_Builder
 			// SplitRight.Panel2
 			// 
 			this.SplitRight.Panel2.Controls.Add(this.StatusTextBox);
-			this.SplitRight.Size = new System.Drawing.Size(399, 748);
-			this.SplitRight.SplitterDistance = 528;
+			this.SplitRight.Size = new System.Drawing.Size(405, 748);
+			this.SplitRight.SplitterDistance = 522;
 			this.SplitRight.SplitterWidth = 5;
 			this.SplitRight.TabIndex = 0;
 			this.SplitRight.TabStop = false;
@@ -900,7 +953,7 @@ namespace Regex_Builder
 			this.MatchInformation.Location = new System.Drawing.Point(0, 0);
 			this.MatchInformation.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.MatchInformation.Name = "MatchInformation";
-			this.MatchInformation.Size = new System.Drawing.Size(399, 528);
+			this.MatchInformation.Size = new System.Drawing.Size(405, 522);
 			this.MatchInformation.TabIndex = 0;
 			this.MatchInformation.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.MatchInformation_AfterSelect);
 			// 
@@ -912,7 +965,7 @@ namespace Regex_Builder
 			this.StatusTextBox.Multiline = true;
 			this.StatusTextBox.Name = "StatusTextBox";
 			this.StatusTextBox.ReadOnly = true;
-			this.StatusTextBox.Size = new System.Drawing.Size(399, 215);
+			this.StatusTextBox.Size = new System.Drawing.Size(405, 221);
 			this.StatusTextBox.TabIndex = 0;
 			// 
 			// OptionsMenu
@@ -934,7 +987,7 @@ namespace Regex_Builder
             this.toolStripMenuItem2,
             this.helpToolStripMenuItem});
 			this.OptionsMenu.Name = "OptionsMenu";
-			this.OptionsMenu.Size = new System.Drawing.Size(290, 332);
+			this.OptionsMenu.Size = new System.Drawing.Size(290, 304);
 			// 
 			// OptionCultureInvariant
 			// 
@@ -999,6 +1052,14 @@ namespace Regex_Builder
 			this.OptionSingleline.Size = new System.Drawing.Size(289, 24);
 			this.OptionSingleline.Text = "&Singleline";
 			this.OptionSingleline.Click += new System.EventHandler(this.OptionChanged);
+			// 
+			// OptionCompiled
+			// 
+			this.OptionCompiled.CheckOnClick = true;
+			this.OptionCompiled.Name = "OptionCompiled";
+			this.OptionCompiled.Size = new System.Drawing.Size(289, 24);
+			this.OptionCompiled.Text = "C&ompiled";
+			this.OptionCompiled.Click += new System.EventHandler(this.OptionChanged);
 			// 
 			// toolStripMenuItem1
 			// 
@@ -1071,14 +1132,6 @@ namespace Regex_Builder
 			this.optionsToolStripMenuItem.Text = "Options";
 			this.optionsToolStripMenuItem.Click += new System.EventHandler(this.OptionsButton_Click);
 			// 
-			// OptionCompiled
-			// 
-			this.OptionCompiled.CheckOnClick = true;
-			this.OptionCompiled.Name = "OptionCompiled";
-			this.OptionCompiled.Size = new System.Drawing.Size(289, 24);
-			this.OptionCompiled.Text = "C&ompiled";
-			this.OptionCompiled.Click += new System.EventHandler(this.OptionChanged);
-			// 
 			// RegexBuilder
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -1086,6 +1139,7 @@ namespace Regex_Builder
 			this.ClientSize = new System.Drawing.Size(1019, 748);
 			this.Controls.Add(this.mainMenu);
 			this.Controls.Add(this.SplitMain);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.mainMenu;
 			this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.Name = "RegexBuilder";
@@ -1228,5 +1282,11 @@ namespace Regex_Builder
         private System.Windows.Forms.RichTextBox RegularExpression;
         private System.Windows.Forms.MenuItem mUnescapeSelectionExpression;
 		private System.Windows.Forms.ToolStripMenuItem OptionCompiled;
+		private System.Windows.Forms.MenuItem menuItem3;
+		private System.Windows.Forms.MenuItem mCodeEx1_public;
+		private System.Windows.Forms.MenuItem mCodeEx1_protected;
+		private System.Windows.Forms.MenuItem mCodeEx1_private;
+		private System.Windows.Forms.MenuItem mCodeEx_static;
+		private System.Windows.Forms.Button StaticSwitchButton;
 	}
 }

@@ -6,8 +6,7 @@
     <ProjectGuid>{693A703A-7D39-4BAC-B835-0050A61E363D}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
     <AssemblyName>正则表达式测试工具</AssemblyName>
@@ -109,6 +108,13 @@
       <SubType>Designer</SubType>
       <DependentUpon>RegexBuilder.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
+    <Content Include="Resources\icon_256.png" />
+    <Content Include="Resources\icon_32.png" />
+    <Content Include="Resources\icon_64.png" />
+    <Content Include="Resources\icon_96.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
