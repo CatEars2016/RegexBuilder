@@ -9,7 +9,7 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
-    <AssemblyName>正则表达式测试工具</AssemblyName>
+    <AssemblyName>RegexBuilder</AssemblyName>
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
     <DefaultClientScript>JScript</DefaultClientScript>
