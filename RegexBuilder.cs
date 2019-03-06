@@ -41,6 +41,7 @@ namespace Regex_Builder
 			// CatEars: 从程序集上读取版本号
 			Version version = typeof(RegexBuilder).Assembly.GetName().Version;
 			this.Text = String.Format("Regex Builder v{0}.{1:00}", version.Major, version.Minor);
+			this.StartPosition = FormStartPosition.CenterScreen;
 		}
 
         #region Member Fields
